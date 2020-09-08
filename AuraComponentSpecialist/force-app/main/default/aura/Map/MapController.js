@@ -16,9 +16,8 @@
         component.set('v.zoomLevel', 10);
         
         /*
-        
         This code is expected while checking challlenge but not mentioned in the requirement.
-        
+        */
         locationData = {
             sObjectId : params.sObjectId,
             lat : params.lat,
@@ -27,7 +26,5 @@
         };
 
         component.set('v.location', locationData);
-        */
-
     }   
 })
