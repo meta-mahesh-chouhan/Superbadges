@@ -2,6 +2,8 @@
 
 This folder contians all the metadata required to complete [Aura Components Specialist](https://trailhead.salesforce.com/en/content/learn/superbadges/superbadge_lcf) superbadge. The metadata is in SFDX format so it can be pushed to scratch orgs as well as can be deployed to non scratch orgs.
 
+**Org Username: mahesh.chouhan@brave-moose-6ckbr8.com**
+
 ## [Aura Component Event Propogation](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/events_component_bubbling.htm)
 
 ```
