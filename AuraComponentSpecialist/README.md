@@ -2,7 +2,17 @@
 
 This folder contians all the metadata required to complete [Aura Components Specialist](https://trailhead.salesforce.com/en/content/learn/superbadges/superbadge_lcf) superbadge. The metadata is in SFDX format so it can be pushed to scratch orgs as well as can be deployed to non scratch orgs.
 
-Aura Component Life Cycle
+## [Aura Component Event Propogation](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/events_component_bubbling.htm)
+
+```
+<!--c:owner-->
+<aura:component>
+    <c:container>
+        <c:eventSource />
+    </c:container>
+</aura:component>
+```
+**`c:container` cannot handle by default the event fired by `c:eventSource`**
 
 ## Key learnings from superbadge  
 
@@ -52,11 +62,11 @@ $A.enqueueAction(action);
 **To apply CSS**
 
 ```
-//No Space between THIS and class for top level class
+//No Space between THIS and class for top level
 .THIS.top { 
 }
 
-//Space between THIS and class for top level class
+//Space between THIS and class for bottom level
 .THIS .bottom {
 
 }
