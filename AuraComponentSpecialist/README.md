@@ -2,20 +2,62 @@
 
 This folder contians all the metadata required to complete [Aura Components Specialist](https://trailhead.salesforce.com/en/content/learn/superbadges/superbadge_lcf) superbadge. The metadata is in SFDX format so it can be pushed to scratch orgs as well as can be deployed to non scratch orgs.
 
-## Key learnings from superbadge
+## Key learnings from superbadge  
 
 1. Before working on developing lightning components, always disable `Caching` in `Session Settings` by unchecking `Enable secure and persistent browser caching to improve performance`.
 
 2. You can preview an Aura Application but not stand-alone aura components.
 
-3. To use slds, extend `force:slds` like this ``<aura:application extends="force:slds">``
-There are two types of developer processes or models supported in Salesforce Extensions for VS Code and Salesforce CLI. These models are explained below. Each model offers pros and cons and is fully supported.
+3. To use slds, extend `force:slds` like this `<aura:application extends="force:slds">`
 
-### Package Development Model
+4. `access="global"` specifies component will be avaliable for all orgs and `public` within your org only.
 
-The package development model allows you to create self-contained applications or libraries that are deployed to your org as a single package. These packages are typically developed against source-tracked orgs called scratch orgs. This development model is geared toward a more modern type of software development process that uses org source tracking, source control, and continuous integration and deployment.
+5. Component must implement `implements="flexipage:availableForAllPageTypes"` to be used on Lightning Pages.
 
-If you are starting a new project, we recommend that you consider the package development model. To start developing with this model in Visual Studio Code, see [Package Development Model with VS Code](https://forcedotcom.github.io/salesforcedx-vscode/articles/user-guide/package-development-model). For details about the model, see the [Package Development Model](https://trailhead.salesforce.com/en/content/learn/modules/sfdx_dev_model) Trailhead module.
+6. `<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>` This handler call the controller's doInit method on initialization of aura component. The name should be `init`.
+
+7. Aura components can be created either using [Lightining Component](https://developer.salesforce.com/docs/component-library/) or HTML div with [SLDS](https://www.lightningdesignsystem.com/) classes.
+
+8.
+
+## Important Lightning Components
+
+1. `<aura:attribute name="BoatTypes" type="BoatType__c[]"/>` Aura attributes to store value in aura components.
+
+2. 
+
+## Key learnings regarding Events and their Propogation
+
+1. Create Application Event to transmit events outside the hierarchy. Add attributes in events to store values.
+
+2. Use `<aura:registerEvent name="formsubmit" type="c:Formsubmit"/>` to specify that your component will fire this event.
+
+3. Fire the event from contoller of component.
+
+FOR COMPONENT EVENT : 
+```json
+//Get the event by the name specified while registering event
+var formSubmitEvent = component.getEvent("formsubmit");
+formSubmitEvent.setParams({
+    "formData":{
+        "boatTypeId" : component.get("v.selectedBoat")
+    }
+});
+formSubmitEvent.fire();
+```
+
+FOR APPLICATION EVENT : 
+```json
+// Use e.<namespace>:Event-Name instead of event.<namespace>:Event-Name
+var plotMarkerEvent = $A.get("e.c:PlotMapMarker");
+plotMarkerEvent.setParams({
+    "lat": component.get("v.boat.Geolocation__Latitude__s"),
+    "long": component.get("v.boat.Geolocation__Longitude__s"),
+    "label": component.get("v.boat.Name")
+});
+console.log('Plot Map Marker Event Fired');
+plotMarkerEvent.fire();
+```
 
 If you are developing against scratch orgs, use the command `SFDX: Create Project` (VS Code) or `sfdx force:project:create` (Salesforce CLI) to create your project. If you used another command, you might want to start over with that command.
 
