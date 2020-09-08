@@ -1,0 +1,26 @@
+<aura:component access="global" controller="BoatSearchResults">
+    <aura:attribute name="BoatTypes" type="BoatType__c[]"/>
+    <aura:attribute name="isNewButtonVisible" type="Boolean"/>
+    <aura:attribute name="selectedBoat" type="BoatType__c"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <!-- Register the component event so that this component can fire the event from controller-->
+    <aura:registerEvent name="formsubmit" type="c:Formsubmit"/>
+    <lightning:card title="Find a Boat">
+        <lightning:layout verticalAlign="end" horizontalAlign="center">
+            <lightning:layoutItem padding="around-small">
+                <lightning:select name="selectBoat" aura:id="selectBoat" label="" variant="label-hidden" value="{!v.selectedBoat}" >
+                    <option value="">All Types</option>
+                    <aura:iteration items="{!v.BoatTypes}" var="boatType">
+                        <option value="{!boatType.Id}" text="{!boatType.Name}"/>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+                <lightning:button variant="Brand" label="Search" onclick="{!c.onFormSubmit}"/>
+                <aura:if isTrue="{!v.isNewButtonVisible}">
+                    <lightning:button variant="Neutral" label="New" onclick="{!c.createBoat}"/>
+                </aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>

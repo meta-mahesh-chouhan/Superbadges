@@ -1,0 +1,7 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:handler name="formsubmit" event="c:Formsubmit" action="{!c.onFormSubmit}"/>
+    <c:BoatSearchForm/>
+    <lightning:card title="Matching Boats">
+        <c:BoatSearchResults aura:id="boatSearchResultsCmp"/>
+    </lightning:card>
+</aura:component>
