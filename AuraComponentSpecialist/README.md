@@ -1,9 +1,14 @@
 # [Aura Components Specialist](https://trailhead.salesforce.com/en/content/learn/superbadges/superbadge_lcf)
 
-This guide helps Salesforce developers who are new to Visual Studio Code go from zero to a deployed app using Salesforce Extensions for VS Code and Salesforce CLI.
+This folder contians all the metadata required to complete [Aura Components Specialist](https://trailhead.salesforce.com/en/content/learn/superbadges/superbadge_lcf) superbadge. The metadata is in SFDX format so it can be pushed to scratch orgs as well as can be deployed to non scratch orgs.
 
-## Part 1: Choosing a Development Model
+## Key learnings from superbadge
 
+1. Before working on developing lightning components, always disable `Caching` in `Session Settings` by unchecking `Enable secure and persistent browser caching to improve performance`.
+
+2. You can preview an Aura Application but not stand-alone aura components.
+
+3. To use slds, extend `force:slds` like this ``<aura:application extends="force:slds">``
 There are two types of developer processes or models supported in Salesforce Extensions for VS Code and Salesforce CLI. These models are explained below. Each model offers pros and cons and is fully supported.
 
 ### Package Development Model
