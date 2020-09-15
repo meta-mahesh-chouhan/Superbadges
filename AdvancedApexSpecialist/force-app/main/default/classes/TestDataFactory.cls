@@ -53,8 +53,9 @@ public with sharing class TestDataFactory {
         
         for(Product2 product : prods)
         {
-            priceBookEntries.add(new PricebookEntry(Product2Id = product.Id, UnitPrice = 10 * index,
-            Pricebook2Id = Constants.STANDARD_PRICEBOOK_ID, isActive = true));
+            PricebookEntry pbe = new PricebookEntry(Product2Id = product.Id, UnitPrice = 10 * index, isActive = true);
+            pbe.Pricebook2Id = Test.isRunningTest() ? Test.getStandardPricebookId() : Constants.STANDARD_PRICEBOOK_ID;
+            priceBookEntries.add(pbe);
             index++;
         }
 
@@ -105,7 +106,9 @@ public with sharing class TestDataFactory {
         List<Order> orders = new List<Order>();
         for(Integer index = 0; index < cnt; index++)
         {
-            orders.add(new Order(AccountId = accts.get(index).Id, Status = 'Draft', EffectiveDate = System.today(), Pricebook2Id = Constants.STANDARD_PRICEBOOK_ID));
+            Order order = new Order(AccountId = accts.get(index).Id, Status = 'Draft', EffectiveDate = System.today());
+            order.Pricebook2Id = Test.isRunningTest() ? Test.getStandardPricebookId() : Constants.STANDARD_PRICEBOOK_ID;
+            orders.add(order);
         }
 
         return orders;
@@ -154,5 +157,10 @@ public with sharing class TestDataFactory {
 
         insert TestDataFactory.ConstructOrderItems(cnt, pbes, orders);
     }
-
+    
+    public static void VerifyQuantityOrdered(Product2 originalProduct, Product2 updatedProduct, Integer qtyOrdered)
+    {
+        System.assertEquals(updatedProduct.Quantity_Ordered__c - originalProduct.Quantity_Ordered__c, qtyOrdered, 'Differece between Original and Updated Order Quantity is not same as expected.');
+        System.assertEquals(updatedProduct.Quantity_Ordered__c, qtyOrdered, 'The quanity is not updated as expected.');
+    }
 }

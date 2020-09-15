@@ -28,3 +28,7 @@ OrderItem contains PriceBookEntryId field from where the price of the orderitem 
 Product2 does not contain any field to store its price. The price of the product is stored in the PriceBookEntry record which contains a lookup to Product2 and PriceBook.
 
 Test.getStandardPricebookId() is the way to get standard price book id in test class.
+
+//Set Current VF page while testing apex controller
+PageReference pageRef = Page.success;
+Test.setCurrentPage(pageRef);

@@ -7,7 +7,7 @@ public class Product2Extension {
         productsToInsert = new List<ProductWrapper>();
         addRows();
     }
-
+    
     public Product2Extension(){
         productsToInsert = new List<ProductWrapper>();
         addRows();
@@ -64,7 +64,7 @@ public class Product2Extension {
                 PriceBookEntry pbE = priceBookEntryMap.get(index1);
                 if(productMap.get(index1).Id!=null) {
                 pbE.Product2Id = productMap.get(index1).Id;
-                pbE.Pricebook2Id = Constants.STANDARD_PRICEBOOK_ID;
+                pbE.Pricebook2Id = Test.isRunningTest() ? Test.getStandardPricebookId() : Constants.STANDARD_PRICEBOOK_ID;
                 pbE.isActive = true;
                 }
             }
