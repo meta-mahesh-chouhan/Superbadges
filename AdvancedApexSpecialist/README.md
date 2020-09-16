@@ -32,3 +32,11 @@ Test.getStandardPricebookId() is the way to get standard price book id in test c
 //Set Current VF page while testing apex controller
 PageReference pageRef = Page.success;
 Test.setCurrentPage(pageRef);
+
+//Insert feed on any object
+insert new FeedItem(
+    Body=p.Name+' Quantity is down to '+p.Quantity_Remaining__c,
+    ParentId = p.Id// Id of the object
+);
+
+No requirement for Database.Stateful interface in Queuable class because execute method executes only once. We can chain queue one by another.

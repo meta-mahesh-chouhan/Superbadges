@@ -2,12 +2,14 @@
  * @name AnnouncementQueueable
  * @description This class posts Chatter Announcements
 **/
-public class AnnouncementQueueable {
-
+public class AnnouncementQueueable implements Queueable {
     public List<ConnectApi.AnnouncementInput> toPost;
 
-    //ToDo: Modify this class to implement the Queueable interface and call the postAnnouncements method
-
+    //Use QueueableContext for context type and not System.QueueableContext
+    public void execute(QueueableContext context)
+    {
+        PostAnnouncements(toPost);
+    }
 
     /**
      * @name postAnnouncements
@@ -16,6 +18,7 @@ public class AnnouncementQueueable {
     public static void PostAnnouncements(List<ConnectApi.AnnouncementInput> announcements){
         while ( announcements.size() > 0 ){
             if ( Limits.getDMLStatements() < Limits.getLimitDMLStatements() && !test.isRunningTest() ){
+                System.debug('Inside Post Announcment method');
                 ConnectApi.AnnouncementInput a = announcements.remove(0);
                 ConnectApi.Announcements.postAnnouncement('Internal', a);
             } else {
@@ -26,6 +29,7 @@ public class AnnouncementQueueable {
             AnnouncementQueueable q = new AnnouncementQueueable();
             q.toPost = announcements;
 
+            System.enqueueJob(q);
             //ToDo: Enqueue the above instance of announcementQueueable
         }
     }
