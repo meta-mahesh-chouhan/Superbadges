@@ -44,7 +44,7 @@ public class Product2Extension {
             for(ProductWrapper pw : productsToInsert)
             {
                 if(pw.productRecord.Name != null && String.isNotBlank(pw.productRecord.Name) && pw.productRecord.Family != null
-                    && pw.productRecord.isActive && pw.productRecord.Initial_Inventory__c != null && pw.pricebookEntryRecord.UnitPrice != null
+                    && pw.productRecord.Initial_Inventory__c != null && pw.pricebookEntryRecord.UnitPrice != null
                     && pw.pricebookEntryRecord.UnitPrice != 0 && pw.productRecord.Initial_Inventory__c != 0)
                     {
                         productMap.put(index, pw.productRecord);
@@ -64,7 +64,7 @@ public class Product2Extension {
                 PriceBookEntry pbE = priceBookEntryMap.get(index1);
                 if(productMap.get(index1).Id!=null) {
                 pbE.Product2Id = productMap.get(index1).Id;
-                pbE.Pricebook2Id = Test.isRunningTest() ? Test.getStandardPricebookId() : Constants.STANDARD_PRICEBOOK_ID;
+                pbE.Pricebook2Id = Constants.STANDARD_PRICEBOOK_ID;
                 pbE.isActive = true;
                 }
             }
@@ -75,7 +75,6 @@ public class Product2Extension {
                 insert priceBookEntryMap.values();
             }
             
-
             //If successful clear the list and display an informational message
             apexPages.addMessage(new ApexPages.message(ApexPages.Severity.INFO,productsToInsert.size()+' Inserted'));
             productsToInsert.clear();   //Do not removeo

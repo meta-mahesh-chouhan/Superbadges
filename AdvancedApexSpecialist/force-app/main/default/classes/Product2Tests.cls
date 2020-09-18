@@ -1,5 +1,20 @@
 @isTest
 private class Product2Tests {
+    
+    @testSetup
+    public static void SetupTestData(){  
+        
+        CollaborationGroup ChatterGroup = new CollaborationGroup(
+            Name = 'TEST'+ constants.INVENTORY_ANNOUNCEMENTS,  
+            CollaborationType = 'Public',
+            CanHaveGuests = false,
+            IsArchived = false,
+            IsAutoArchiveDisabled = true
+        );
+        insert ChatterGroup;
+        
+    }
+  
     /**
      * @name product2Extension_UnitTest
      * @description UnitTest for product2Extension
@@ -19,11 +34,11 @@ private class Product2Tests {
         //When
         Test.startTest();
         
-        ext.GetInventory();
         selectOptions = ext.GetFamilyOptions();
         ext.productsToInsert[0].productRecord = productToInsert;
         ext.productsToInsert[0].pricebookEntryRecord = pbe;
         ext.save();
+        ext.GetInventory();
         Test.stopTest();
         
         //Then
@@ -35,5 +50,21 @@ private class Product2Tests {
         System.assertEquals(true, products[0].isActive, 'Product is not active.');
         System.assertEquals(10, products[0].Initial_Inventory__c, 'Initial Inventory was not same as expected.');
         System.assertEquals('Side', products[0].Family, 'Product Family was not same as expected.');
+    }
+    
+    static testmethod void Product2Trigger_UnitTest()
+    {
+        Test.startTest();
+        Product2 newProduct = new Product2();
+        newProduct.Name = 'Test';
+        newProduct.Family = 'Dessert';
+        newProduct.IsActive = true;
+        newProduct.Quantity_Ordered__c = 5;
+        newProduct.Initial_Inventory__c = 10;
+        insert newProduct;
+        
+        newProduct.Quantity_Ordered__c=96;
+        update newProduct;
+        Test.stopTest();
     }
 }
