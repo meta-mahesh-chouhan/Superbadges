@@ -30,60 +30,6 @@
 </head>
 <body class='theme--trailhead trailhead-locale-en' id='atomic'>
 <div id='main-wrapper'>
-<style>
-  .th-branding__border-color {
-    border-color: #00a1df !important;
-  }
-  .th-branding__background-color--primary-light {
-    background-color: rgba(0, 161, 223, 0.05) !important;
-  }
-  
-  .th-branding__background-color--secondary {
-      background-color: #00407e !important;
-  }
-</style>
-
-
-<style>
-  .skip-nav {
-    background: var(--tds-color-white);
-    border-bottom-right-radius: var(--tds-radius-md);
-    box-shadow: var(--tds-shadow-md);
-    padding: var(--tds-spacing-3) var(--tds-spacing-5);
-    left: 0px;
-    position: absolute;
-    transition: top 0.5s ease 0s;
-    z-index: 20001;
-    text-align: center;
-    color: var(--tds-color-brand);
-    top: calc(var(--tds-spacing-40) * -1);
-    font-weight: bold;
-    text-decoration: none;
-  }
-  .skip-nav:hover {
-    text-decoration: underline;
-  }
-  .skip-nav:focus {
-    top: 0;
-    transition: top 0.1s ease 0s;
-  }
-
-  @media screen and (max-width: 1279px) {
-    /* mobile */
-    #global-nav-container {
-      min-height: 112px;
-    }
-  }
-  @media screen and (min-width: 1280px) {
-    /* desktop */
-    #global-nav-container {
-      min-height: 144px;
-    }
-  }
-</style>
-
-<a class="skip-nav" href="#main">Skip to main content</a>
-
 <div id="global-nav-container">
   <hgf-c360contextnav id="contextnav"></hgf-c360contextnav>
 </div>
